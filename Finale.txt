@@ -1,0 +1,36 @@
+
+
+
+public static void main(String[] args) throws InterruptedException {
+// TODO Auto-generated method stub
+WebDriverManager.chromedriver().setup();
+ChromeOptions options = new ChromeOptions();
+options.addArguments("--disable-notifications");
+ChromeDriver driver = new ChromeDriver(options); driver.manage().window().maximize();
+//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+driver.get("https://login.salesforce.com/");
+driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+driver.findElement(By.id("password")).sendKeys("Tuna@123");
+driver.findElement(By.id("Login")).click();
+Thread.sleep(2000);
+String title = driver.getTitle();
+System.out.println(title);
+if(title.contains("Home Page ~ Salesforce - Developer Edition")) {
+System.out.println("Inside IF");
+driver.findElement(By.xpath("//a[@title='Home Tab']")).click(); Thread.sleep(3000);
+driver.findElement(By.xpath("//input[@value='No Thanks']")).click();
+Thread.sleep(3000);
+driver.findElement(By.xpath("//input[@value='Send to Salesforce']")).click();
+}
+else { System.out.println("Inside else");
+driver.findElement(By.xpath("(//span[@class='uiImage'])[1]")).click(); Thread.sleep(10000);
+driver.findElement(By.xpath("//a[@class='profile-link-label switch-to-aloha uiOutputURL']")).click(); 
+Thread.sleep(20000);
+}
+driver.findElement(By.id("createNewButton")).click();
+driver.findElement(By.xpath("//a[@class='menuButtonMenuLink firstMenuItem eventMru']")).click(); 
+driver.findElement(By.xpath("(//div[@class='requiredInput']//input[@type='text'])[2]")).sendKeys("event1"); 
+driver.findElement(By.xpath("//input[@name='attachFile']")).click();
+ }
+
+}
